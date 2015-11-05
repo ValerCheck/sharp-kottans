@@ -34,13 +34,5 @@ namespace OOP.Shapes
             var p = (_edge1 + _edge2 + _edge3)/2;
             return Multiplier * Math.Sqrt(p*(p - _edge1)*(p - _edge2)*(p - _edge3));
         }
-
-        public override void Move(int deltaX, int deltaY)
-        {
-            CoordX += deltaX;
-            CoordY += deltaY;
-        }
-
-        public override string ShapeName => GetType().Name;
     }
 }

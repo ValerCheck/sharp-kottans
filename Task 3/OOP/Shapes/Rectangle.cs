@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Security;
 
 namespace OOP.Shapes
 {
@@ -32,13 +30,5 @@ namespace OOP.Shapes
         {
             return _edge2*_edge1*Multiplier;
         }
-
-        public override void Move(int deltaX, int deltaY)
-        {
-            CoordX += deltaX;
-            CoordY += deltaY;
-        }
-
-        public override string ShapeName => GetType().Name;
     }
 }

@@ -49,7 +49,6 @@ namespace OOP.Tests
             ,typeof(RightTriangle)
             )] Type targetType,
             [Values(Radius * Radius * Math.PI
-            // TODO: UNCOMMENT WHEN IMPLEMENTED ALL SHAPES
             ,Edge1 * Edge2
             ,6d
             ,6d

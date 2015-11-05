@@ -21,14 +21,19 @@ namespace OOP
             Multiplier = 1;
         }
 
-        public abstract string ShapeName { get; }
+        public virtual string ShapeName => GetType().Name;
         public int CoordX { get; protected set; }
         public int CoordY { get; protected set; }
         public byte Multiplier { get; set; }
 
 		public abstract double GetPerimeter();
 		protected abstract double Area();
-		public abstract void Move(int deltaX, int deltaY);
+
+	    public virtual void Move(int deltaX, int deltaY)
+	    {
+            CoordX += deltaX;
+            CoordY += deltaY;
+        }
 
         public override string ToString()
         {

@@ -28,13 +28,5 @@ namespace OOP.Shapes
 	    {
 	        return Math.PI*Math.Pow(_radius, 2)* Math.Pow(Multiplier, 2);
 	    }
-
-	    public override void Move(int deltaX, int deltaY)
-	    {
-	        CoordX += deltaX;
-	        CoordY += deltaY;
-	    }
-
-	    public override string ShapeName => GetType().Name;
 	}
 }
