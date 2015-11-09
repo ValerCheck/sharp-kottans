@@ -1,23 +1,24 @@
 ﻿using System;
+using BattleShip;
 using NUnit.Framework;
 
 namespace Battleship.Tests
 {
     public class ShipParseShould
     {
-        //[TestCase("A1", 1u, 1u, 1u, Direction.Horizontal)]
-        //[TestCase("A2x2", 1u, 2u, 2u, Direction.Horizontal)]
-        //[TestCase("A2x2-", 1u, 2u, 2u, Direction.Horizontal)]
-        //[TestCase("A2x2|", 1u, 2u, 2u, Direction.Vertiacal)]
-        //public void ParseNotation(string notation, uint expectedX, uint expectedY, uint expectedLength, Direction expectedDirection)
-        //{
-        //    var position = Ship.Parse(notation);
+        [TestCase("A1", 1u, 1u, 1u, Direction.Horizontal)]
+        [TestCase("A2x2", 1u, 2u, 2u, Direction.Horizontal)]
+        [TestCase("A2x2-", 1u, 2u, 2u, Direction.Horizontal)]
+        [TestCase("A2x2|", 1u, 2u, 2u, Direction.Vertical)]
+        public void ParseNotation(string notation, uint expectedX, uint expectedY, uint expectedLength, Direction expectedDirection)
+        {
+            var position = Ship.Parse(notation);
 
-        //    Assert.AreEqual(expectedX, position.X);
-        //    Assert.AreEqual(expectedY, position.Y);
-        //    Assert.AreEqual(expectedLength, position.Length);
-        //    Assert.AreEqual(expectedDirection, position.Direction);
-        //}
+            Assert.AreEqual(expectedX, position.X);
+            Assert.AreEqual(expectedY, position.Y);
+            Assert.AreEqual(expectedLength, position.Length);
+            Assert.AreEqual(expectedDirection, position.Direction);
+        }
 
         //[TestCase("not a ship")]
         //[TestCase("M1")]
