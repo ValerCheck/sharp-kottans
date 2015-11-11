@@ -8,5 +8,6 @@
         Direction Direction { get; }
         bool FitsInSquare(byte height, byte width);
         bool OverlapsWith(IShip target);
+        string GetNotation();
     }
 }

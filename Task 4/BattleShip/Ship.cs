@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using BattleShip.BattleShipExceptions;
 
 namespace BattleShip
 {
@@ -30,6 +31,14 @@ namespace BattleShip
             _length = length;
         }
 
+        public int Length => _length;
+
+        public int X => _x;
+
+        public int Y => _y;
+
+        public Direction Direction => _direction;
+
         public static IShip Parse(string notation)
         {
             var shipFullNotation = Regex.Match(notation, @"[A-J]\d{1,2}(x\d)?(-|\|)?").Value;
@@ -37,7 +46,7 @@ namespace BattleShip
             if (string.IsNullOrEmpty(shipFullNotation) || shipFullNotation.Length < notation.Length)
                 throw new NotAShipException("Wrong ship notation");
 
-            var yAndLength = Regex.Matches(shipFullNotation, @"\d");
+            var yAndLength = Regex.Matches(shipFullNotation, @"\d+");
 
             var y = int.Parse(yAndLength[0].Value);
             var length = yAndLength.Count > 1 ? int.Parse(yAndLength[1].Value) : 1;
@@ -66,14 +75,6 @@ namespace BattleShip
             }
         }
 
-        public int Length => _length;
-
-        public int X => _x;
-
-        public int Y => _y;
-
-        public Direction Direction => _direction;
-
         public bool FitsInSquare(byte height, byte width)
         {
             var overlaySqare = X <= width && Y <= height;
@@ -101,15 +102,22 @@ namespace BattleShip
                 YE = target.Direction == Direction.Vertical ? target.Y + Length - 1 : target.Y
             };
 
-            var condition1 = (targetBox.YS >= thisBox.YS && targetBox.YE <= thisBox.YE) && 
-                             ((targetBox.XS <= thisBox.XS && targetBox.XE >= thisBox.XS) ||
-                             (targetBox.XE >= thisBox.XE && targetBox.XS <= thisBox.XE));
+            var horizontalOverlaps = (targetBox.YS >= thisBox.YS && targetBox.YE <= thisBox.YE) && 
+                                     ((targetBox.XS <= thisBox.XS && targetBox.XE >= thisBox.XS) ||
+                                      (targetBox.XE >= thisBox.XE && targetBox.XS <= thisBox.XE));
 
-            var condition2 = (targetBox.XS >= thisBox.XS && targetBox.XE <= thisBox.XE) &&
-                             ((targetBox.YS <= thisBox.YS && targetBox.YE >= thisBox.YS) ||
-                             (targetBox.YE >= thisBox.YE && targetBox.YS <= thisBox.YE));
+            var verticalOverlaps = (targetBox.XS >= thisBox.XS && targetBox.XE <= thisBox.XE) &&
+                                   ((targetBox.YS <= thisBox.YS && targetBox.YE >= thisBox.YS) ||
+                                    (targetBox.YE >= thisBox.YE && targetBox.YS <= thisBox.YE));
 
-            return condition1 || condition2;
+            return horizontalOverlaps || verticalOverlaps;
+        }
+
+        public string GetNotation()
+        {
+            var y = (char) Y + 64;
+            var dir = Direction == Direction.Vertical ? @"|" : "-";
+            return $"{y}{X}x{Length}{dir}";
         }
 
         public static bool operator ==(Ship shipA, IShip shipB)
@@ -134,7 +142,6 @@ namespace BattleShip
 
         public override bool Equals(object obj)
         {
-            int b = 123;
             var boat = (Ship)obj;
             if (boat == null || obj == null) return false;
             return Equals(boat);

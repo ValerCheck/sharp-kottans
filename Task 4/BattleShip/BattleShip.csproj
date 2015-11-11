@@ -41,8 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AircraftCarrier.cs" />
+    <Compile Include="BattleShipExceptions\BoardIsNotReadyException.cs" />
+    <Compile Include="BattleShipExceptions\ShipOverlapException.cs" />
+    <Compile Include="BattleShipExceptions\NotAShipException.cs" />
+    <Compile Include="Board.cs" />
     <Compile Include="IShip.cs" />
-    <Compile Include="NotAShipException.cs" />
     <Compile Include="Ship.cs" />
     <Compile Include="Cruiser.cs" />
     <Compile Include="Direction.cs" />
