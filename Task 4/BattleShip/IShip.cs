@@ -6,5 +6,7 @@
         int X { get; }
         int Y { get; }
         Direction Direction { get; }
+        bool FitsInSquare(byte height, byte width);
+        bool OverlapsWith(IShip target);
     }
 }
