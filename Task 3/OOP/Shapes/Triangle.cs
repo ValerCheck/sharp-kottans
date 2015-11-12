@@ -26,13 +26,13 @@ namespace OOP.Shapes
 
         public override double GetPerimeter()
         {
-            return (_edge1 + _edge2 + _edge3) * Multiplier;
+            return (_edge1*Multiplier + _edge2*Multiplier + _edge3*Multiplier);
         }
 
         protected override double Area()
         {
-            var p = (_edge1 + _edge2 + _edge3)/2;
-            return Multiplier * Math.Sqrt(p*(p - _edge1)*(p - _edge2)*(p - _edge3));
+            var p = (_edge1*Multiplier + _edge2*Multiplier + _edge3*Multiplier)/2;
+            return Math.Sqrt(p*(p - _edge1*Multiplier)*(p - _edge2*Multiplier)*(p - _edge3*Multiplier));
         }
     }
 }

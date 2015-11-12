@@ -18,7 +18,7 @@ namespace OOP.Shapes.Triangles
 
         protected override double Area()
         {
-            return Multiplier * Math.Pow(_edge, 2) * (Math.Sqrt(3)/4);
+            return Math.Pow(_edge*Multiplier, 2) * (Math.Sqrt(3)/4);
         }
 
         public override double GetPerimeter()

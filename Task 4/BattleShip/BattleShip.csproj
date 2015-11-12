@@ -40,18 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AircraftCarrier.cs" />
+    <Compile Include="Boats\AircraftCarrier.cs" />
     <Compile Include="BattleShipExceptions\BoardIsNotReadyException.cs" />
     <Compile Include="BattleShipExceptions\ShipOverlapException.cs" />
     <Compile Include="BattleShipExceptions\NotAShipException.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="IShip.cs" />
     <Compile Include="Ship.cs" />
-    <Compile Include="Cruiser.cs" />
+    <Compile Include="Boats\Cruiser.cs" />
     <Compile Include="Direction.cs" />
-    <Compile Include="PatrolBoat.cs" />
+    <Compile Include="Boats\PatrolBoat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Submarine.cs" />
+    <Compile Include="Boats\Submarine.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

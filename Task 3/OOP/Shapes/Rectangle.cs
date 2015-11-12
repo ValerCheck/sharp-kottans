@@ -18,17 +18,17 @@ namespace OOP.Shapes
         public Rectangle(IDictionary<ParamKeys, object> parameters) : base(parameters)
         {
             _edge1 = (double) parameters[ParamKeys.Edge1];
-            _edge2 = (double)parameters[ParamKeys.Edge2];
+            _edge2 = (double) parameters[ParamKeys.Edge2];
         }
 
         public override double GetPerimeter()
         {
-            return 2*(_edge1 + _edge2) * Multiplier;
+            return 2*(_edge1 * Multiplier + _edge2 * Multiplier);
         }
 
         protected override double Area()
         {
-            return _edge2*_edge1*Multiplier;
+            return _edge2*Multiplier * _edge1*Multiplier;
         }
     }
 }

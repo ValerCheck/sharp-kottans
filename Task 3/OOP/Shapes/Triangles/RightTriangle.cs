@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace OOP.Shapes.Triangles
 {
@@ -20,7 +21,7 @@ namespace OOP.Shapes.Triangles
 
         protected override double Area()
         {
-            return (_edge1*_edge2)/2;
+            return (_edge1*_edge2*Math.Pow(Multiplier,2))/2;
         }
     }
 }
