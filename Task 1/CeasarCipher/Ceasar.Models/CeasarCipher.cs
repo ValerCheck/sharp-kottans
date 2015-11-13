@@ -10,7 +10,6 @@ namespace Ceasar.Models
         private const char SpaceSymbol = ' ';
         private readonly char _endSymbol;
         private readonly int _alphabetLength;
-        private char[] _workingSet;
 
         public CeasarCipher(int offset)
         {
@@ -20,12 +19,12 @@ namespace Ceasar.Models
             _alphabetLength = _endSymbol - _startSymbol;
         }
 
-        private void ValidateInput(string input)
+        private void ValidateInput(string input, out char[] validated)
         {
             if (input == null) throw new ArgumentNullException(nameof(input), "Hey dude, " + nameof(input) + " cannot be null.");
-            _workingSet = input.ToCharArray();
+            validated = input.ToCharArray();
 
-            if (_workingSet.Any(t => (t > _endSymbol || t < _startSymbol) && !t.Equals(SpaceSymbol)))
+            if (validated.Any(t => (t > _endSymbol || t < _startSymbol) && !t.Equals(SpaceSymbol)))
             {
                 throw new ArgumentOutOfRangeException(nameof(input), "Your input has some invalid symbols.");
             }
@@ -33,32 +32,27 @@ namespace Ceasar.Models
         
         public string Encrypt(string text)
         {
-            ValidateInput(text);
-
-            if (_offset == 0) return text;
-
-            for (var i = 0; i < _workingSet.Length; i++)
-            {
-                if (_workingSet[i] != SpaceSymbol)
-                    _workingSet[i] = EncryptCharWithOffset(_workingSet[i]);
-            }
-
-            return _workingSet.Aggregate("", (current, sym) => current + sym);
+            return RunCipherMechanism(EncryptCharWithOffset, text);
         }
 
         public string Decrypt(string ciphertext)
         {
-            ValidateInput(ciphertext);
+            return RunCipherMechanism(DecryptCharWithOffset, ciphertext);
+        }
 
-            if (_offset == 0) return ciphertext;
+        private string RunCipherMechanism(Func<char, char> mechanism, string text)
+        {
+            char[] workingSet;
+            ValidateInput(text, out workingSet);
 
-            for (var i = 0; i < _workingSet.Length; i++)
+            if (_offset == 0) return text;
+
+            for (var i = 0; i < workingSet.Length; i++)
             {
-                if (_workingSet[i] != SpaceSymbol)
-                    _workingSet[i] = DecryptCharWithOffset(_workingSet[i]);
+                if (workingSet[i] != SpaceSymbol) workingSet[i] = mechanism(workingSet[i]);
             }
 
-            return _workingSet.Aggregate("", (current, sym) => current + sym);
+            return new string(workingSet);
         }
 
         private char EncryptCharWithOffset(char inputChar)
